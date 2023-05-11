@@ -1,6 +1,7 @@
 import express from 'express';
 import { config } from './config/index.js';
 import { database } from './models/instance.js';
+import proxyRouter from './routes/index.js';
 
 class Server {
   constructor() {
@@ -17,6 +18,7 @@ class Server {
 
   configuration() {
     this.app.set('port', config.development.port);
+    this.app.use('/api/v1', proxyRouter.map());
   }
 
   async connectDB() {
