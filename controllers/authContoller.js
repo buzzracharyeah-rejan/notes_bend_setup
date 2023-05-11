@@ -1,6 +1,6 @@
 import AuthService from '../services/authService';
 
-export const login = async (req, res, next) => {
+const login = async (req, res, next) => {
   const { email, password } = req.body;
   const { user, token } = await new AuthService().login(email, password);
   res.status(200).send({
@@ -13,8 +13,13 @@ export const login = async (req, res, next) => {
   });
 };
 
-export const signup = async (req, res) => {
+const signup = async (req, res) => {
   const { username, email, password } = req.body;
   await new AuthService().create(username, email, password);
   res.status(201).json({ status: 'success', message: 'user signup success!' });
+};
+
+export const authController = {
+  login,
+  signup,
 };

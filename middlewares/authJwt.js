@@ -2,7 +2,6 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config';
 
-console.log(config.development);
 class JwtMiddleware {
   constructor() {
     this.refreshKey = config.development.refreshKey;
@@ -24,7 +23,7 @@ class JwtMiddleware {
     return jwt.sign(payload, this.refreshKey, { expiresIn });
   }
 
-  verifyAccessToken(req, res, next) {
+  verifyAccessToken = (req, res, next) => {
     const token = req.headers.authorization;
     if (!token) {
       return res.status(401).json({ message: 'No token provided' });
@@ -41,9 +40,9 @@ class JwtMiddleware {
       // Move to the next middleware or route handler
       next();
     });
-  }
+  };
 
-  verifyRefreshToken(req, res, next) {
+  verifyRefreshToken = (req, res, next) => {
     const token = req.headers.authorization;
     if (!token) {
       return res.status(401).json({ message: 'No token provided' });
@@ -60,7 +59,7 @@ class JwtMiddleware {
       // Move to the next middleware or route handler
       next();
     });
-  }
+  };
 }
 
 const authJwt = JwtMiddleware.get();
