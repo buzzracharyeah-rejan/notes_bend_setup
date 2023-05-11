@@ -1,6 +1,6 @@
 import RouterClass from '../classes/routerClass.js';
 import exceptionHandler from '../middlewares/exceptionHandler.js';
-import { login } from '../controllers/authContoller.js';
+import { login, signup } from '../controllers/authContoller.js';
 
 class UserRouter extends RouterClass {
   constructor() {
@@ -9,6 +9,7 @@ class UserRouter extends RouterClass {
 
   define() {
     this.router.get('/login', exceptionHandler(login));
+    this.router.post('/signup', exceptionHandler(signup));
   }
 }
 export default UserRouter;

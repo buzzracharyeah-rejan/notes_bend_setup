@@ -4,3 +4,7 @@ export const login = async (req, res, next) => {
     message: 'user login successful',
   });
 };
+
+export const signup = async (req, res) => {
+  const { name, email, password } = req.body;
+};
