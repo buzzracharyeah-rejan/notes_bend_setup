@@ -18,6 +18,10 @@ const tokenSchema = new mongoose.Schema({
     enum: [TOKEN.access_token, TOKEN.refresh_token],
     required: true,
   },
+  expires_in: {
+    type: Date,
+    required: true,
+  },
 });
 
 // Create the Token model based on the token schema

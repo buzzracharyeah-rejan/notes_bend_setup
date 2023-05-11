@@ -1,9 +1,15 @@
 import AuthService from '../services/authService';
 
 export const login = async (req, res, next) => {
-  res.status(200).json({
+  const { email, password } = req.body;
+  const { user, token } = await new AuthService().login(email, password);
+  res.status(200).send({
     status: 'success',
-    message: 'user login successful',
+    message: 'user login success!',
+    data: {
+      user,
+      token,
+    },
   });
 };
 
