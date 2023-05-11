@@ -2,10 +2,11 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config';
 
+console.log(config.development);
 class JwtMiddleware {
   constructor() {
     this.refreshKey = config.development.refreshKey;
-    this.accessKey = config.development.secretKey;
+    this.accessKey = config.development.accessKey;
   }
 
   static get() {
@@ -62,5 +63,5 @@ class JwtMiddleware {
   }
 }
 
-const jwt = JwtMiddleware.get();
-export default jwt;
+const authJwt = JwtMiddleware.get();
+export default authJwt;

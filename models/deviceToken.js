@@ -1,5 +1,6 @@
 // Import required modules
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { TOKEN } from '../constants';
 
 // Define the token schema
 const tokenSchema = new mongoose.Schema({
@@ -14,11 +15,7 @@ const tokenSchema = new mongoose.Schema({
   },
   token_type: {
     type: String,
-    enum: ['refresh_token', 'access_token'],
-    required: true,
-  },
-  expires_at: {
-    type: Date,
+    enum: [TOKEN.access_token, TOKEN.refresh_token],
     required: true,
   },
 });

@@ -2,9 +2,7 @@ import mongoose from 'mongoose';
 import { config } from '../config';
 
 class DBInstance {
-  constructor() {
-    this.conn = mongoose.createConnection(config.development.mongodb_uri);
-  }
+  constructor() {}
 
   static get() {
     if (!DBInstance.instance) {
@@ -15,7 +13,10 @@ class DBInstance {
 
   async connnection() {
     try {
-      await this.conn.asPromise();
+      await mongoose.connect(config.development.mongodb_uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
       console.log('Connected to DB');
     } catch (error) {
       throw new Error(error.message);

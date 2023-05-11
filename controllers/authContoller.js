@@ -1,3 +1,5 @@
+import AuthService from '../services/authService';
+
 export const login = async (req, res, next) => {
   res.status(200).json({
     status: 'success',
@@ -6,5 +8,7 @@ export const login = async (req, res, next) => {
 };
 
 export const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
+  await new AuthService().create(username, email, password);
+  res.status(201).json({ status: 'success', message: 'user signup success!' });
 };
