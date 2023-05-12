@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { config } from './config/index.js';
 import { database } from './models/instance.js';
 import proxyRouter from './routes/index.js';
@@ -19,6 +20,7 @@ class Server {
 
   configuration() {
     this.app.set('port', config.development.port);
+    this.app.use(cors({ origin: 'http://localhost:5173' }));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use('/api/v1', proxyRouter.map());
