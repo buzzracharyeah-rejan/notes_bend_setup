@@ -37,9 +37,20 @@ const listNotes = async (req, res, next) => {
   });
 };
 
+const getNote = async (req, res, next) => {
+  const targetId = req.params.id;
+  const notes = await new NotesService().findOne(targetId);
+  res.status(200).json({
+    status: 'success',
+    message: 'Note listings',
+    data: notes,
+  });
+};
+
 export const notesController = {
   createNotes,
   updateNotes,
   deleteNotes,
   listNotes,
+  getNote,
 };

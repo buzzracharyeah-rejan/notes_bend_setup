@@ -11,6 +11,7 @@ class NotesRouter extends RouterClass {
 
   define() {
     this.router.get('/', exceptionHandler(notesController.listNotes));
+    this.router.get('/:id', exceptionHandler(notesController.getNote));
     this.router.post(
       '/create',
       Validator.check(createNotes),
